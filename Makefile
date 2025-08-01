@@ -6,11 +6,12 @@
 #    By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/26 10:00:22 by ebenoist          #+#    #+#              #
-#    Updated: 2025/07/24 13:43:08 by ebenoist         ###   ########.fr        #
+#    Updated: 2025/08/01 15:27:36 by ebenoist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= pipex
+NAME	= pipex_classix
+BONUS_NAME = pipex
 
 CC		= cc -g
 CFLAGS	= -Wall -Werror -Wextra -g -Ilibft/includes -Iincludes
@@ -18,10 +19,16 @@ CFLAGS	= -Wall -Werror -Wextra -g -Ilibft/includes -Iincludes
 SRC		=	srcs/main.c\
 			srcs/error.c\
 			srcs/path_arg.c\
-			srcs/test_arg.c\
-
+			srcs/test_arg.c
+			
+BONUS_SRCS = bonus/main.c\
+			 bonus/arg.c\
+			 bonus/error.c\
+			 bonus/init.c\
+			 
 OBJ		= $(SRC:.c=.o)
-
+BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
+BONUS_INC	= -Ibonus/includes -Ilibft/includes
 LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
@@ -30,6 +37,12 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
+bonus: CFLAGS += $(BONUS_INC)
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(BONUS_OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT) -o $(BONUS_NAME)
+	
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
@@ -37,13 +50,13 @@ $(LIBFT):
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(BONUS_OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(BONUS_NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 
-re: fclean all
+re: fclean all bonus
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

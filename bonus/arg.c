@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_arg.c                                         :+:      :+:    :+:   */
+/*   arg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 15:20:51 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/07/29 15:04:27 by ebenoist         ###   ########.fr       */
+/*   Created: 2025/07/29 11:37:59 by ebenoist          #+#    #+#             */
+/*   Updated: 2025/08/01 12:33:05 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "pipex.h"
 
 char	*ft_get_path(char **envp)
 {
@@ -31,7 +31,9 @@ char	*ft_management_arg(char *av, char **envp)
 	char	**cmd1;
 	char	*cmd2;
 	char	*path;
-
+	
+ 	if (!av || av[0] == '\0')      /* commande vide → nulle part  */
+        return (NULL);
 	cmd1 = ft_split(av, ' ');
 	if (!cmd1)
 		return (NULL);
@@ -90,4 +92,13 @@ char	*find_path(char *cmd, char *envp)
 		i++;
 	}
 	return (ft_free_tab(paths), NULL);
+}
+
+void	test_arg(int ac)
+{
+	if (ac < 5)
+	{
+		ft_printf("Error\nWrong number argument\n");
+		exit(1);
+	}
 }
