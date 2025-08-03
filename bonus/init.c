@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 12:08:01 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/08/01 14:18:29 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/08/03 12:48:20 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	init_pipes(t_pipe *pipex)
 void	ft_init_pipex_bonus(int ac, char **av, t_pipe *pipex)
 {
 	pipex->nb_cmd = ac - 3;
+	//pipex->outfile_name = av[ac - 1];  
 	pipex->fd_in = open(av[1], O_RDONLY);
 	if (pipex->fd_in == -1)
 	{
@@ -46,10 +47,9 @@ void	ft_init_pipex_bonus(int ac, char **av, t_pipe *pipex)
 	pipex->fd_out = open(av[ac -1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (pipex->fd_out == -1)
 	{
-		perror("Error\nClose File");
-		ft_close_pipe_bonus(pipex);
-		ft_end_programme_bonus(pipex);
-		exit(1);
+		perror(av[ac - 1]);
+		//close(pipex->fd_in);
+		//exit(1);
 	}
 	init_pipes(pipex);
 	pipex->cmdi_arg = calloc(pipex->nb_cmd, sizeof(char **));

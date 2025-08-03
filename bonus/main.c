@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 10:43:44 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/08/01 15:59:15 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/08/03 12:47:32 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@ static void child(t_pipe *pipex, int i, char **envp)
 	else
 		dup2(pipex->fd[i - 1][0], STDIN_FILENO);
 	if(i == pipex-> nb_cmd - 1)
+	{
+		if(pipex->fd_out == -1)
+		{
+			ft_end_programme_bonus(pipex);
+			exit(1);
+		}
 		dup2(pipex->fd_out, STDOUT_FILENO);
+	}
 	else
 		dup2(pipex->fd[i][1], STDOUT_FILENO);
 	ft_close_pipe_bonus(pipex);
@@ -28,8 +35,8 @@ static void child(t_pipe *pipex, int i, char **envp)
 	execve(pipex->cmdi_path[i], pipex->cmdi_arg[i], envp);
 	perror("Error\nChild Execve");
 	ft_erreur127_bonus(pipex);
-	
 }
+
 static void	close_fd(t_pipe *pipex, int i)
 {
 	if(i > 0)

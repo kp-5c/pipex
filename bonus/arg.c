@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 11:37:59 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/08/01 12:33:05 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/08/03 12:52:20 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_management_arg(char *av, char **envp)
 	char	*cmd2;
 	char	*path;
 	
- 	if (!av || av[0] == '\0')      /* commande vide → nulle part  */
+ 	if (!av || av[0] == '\0')
         return (NULL);
 	cmd1 = ft_split(av, ' ');
 	if (!cmd1)

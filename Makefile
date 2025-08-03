@@ -6,11 +6,11 @@
 #    By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/26 10:00:22 by ebenoist          #+#    #+#              #
-#    Updated: 2025/08/01 15:27:36 by ebenoist         ###   ########.fr        #
+#    Updated: 2025/08/03 12:36:56 by ebenoist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= pipex_classix
+NAME	= pipex_classic
 BONUS_NAME = pipex
 
 CC		= cc -g

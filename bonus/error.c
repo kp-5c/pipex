@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 12:13:29 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/08/01 16:02:14 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/08/03 13:00:55 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ft_free_tab_tab(char ***tab, t_pipe *pipex)
 	}
 	free(tab);
 }
-
 
 void	ft_close_pipe_bonus(t_pipe *pipex)
 {
