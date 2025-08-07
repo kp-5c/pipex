@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:37:55 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/05/21 12:04:06 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/08/05 15:17:49 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*read_and_join(int fd, char *stach)
 			break ;
 		if (by_read < 0)
 		{
-			free (stach);
+			free(stach);
 			stach = NULL;
 			break ;
 		}
@@ -60,38 +60,53 @@ char	*get_next_line(int fd)
 	static char	*stach[MAX_FD];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FD)
+	{
+		free(stach[fd]);
+		stach[fd] = NULL;
 		return (NULL);
+	}
 	stach[fd] = read_and_join(fd, stach[fd]);
 	if (!stach[fd])
+	{
+		free(stach[fd]);
+		stach[fd] = NULL;
 		return (NULL);
+	}
 	return (return_and_clean(&stach[fd]));
 }
 
+/* ************************************************************************** */
+/*  ft_save.c  –  garde ce qu’il reste après le \n                            */
+/* ************************************************************************** */
+
 char	*ft_save(char *str)
 {
-	int		i;
+	size_t	i;
+	size_t	len;
 	char	*dest;
-	int		j;
-	int		k;
 
+	if (!str)
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
 		i++;
-	j = ft_strlen(str);
-	dest = ft_calloc((j - i) + 1, sizeof(char));
+	len = ft_strlen(str) - i;
+	if (len == 0)
+	{
+		free(str);
+		return (NULL);
+	}
+	dest = ft_calloc(len + 1, sizeof(char));
 	if (!dest)
 		return (NULL);
-	k = 0;
-	while (i < j)
-		dest[k++] = str[i++];
-	dest[k] = '\0';
-	free (str);
+	ft_memcpy(dest, str + i, len);
+	free(str);
 	return (dest);
 }
 
-char	*ft_line(char	*str)
+char	*ft_line(char *str)
 {
 	int		i;
 	char	*s;
@@ -105,7 +120,7 @@ char	*ft_line(char	*str)
 		i++;
 	if (str[i] == '\n')
 		i++;
-	s = ft_calloc ((i) + 1, sizeof(char));
+	s = ft_calloc((i) + 1, sizeof(char));
 	if (!s)
 		return (NULL);
 	while (j < i)

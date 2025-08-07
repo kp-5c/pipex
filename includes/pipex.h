@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 09:58:44 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/08/01 15:14:03 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/08/04 14:49:25 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PIPEX_H
 
 # include "../libft/libft.h"
+# include <sys/wait.h>
 
-#include <sys/wait.h>
 typedef struct s_pipe
 {
 	char	*cmd1_path;
@@ -34,6 +34,7 @@ typedef struct s_pipe
 	int		fd_out;
 	char	**paths;
 	char	**path_cmd;
+	int		here_doc;
 }			t_pipe;
 
 void		ft_free_tab(char **tab);
@@ -54,4 +55,6 @@ void		ft_init_pipex_bonus(int ac, char **av, t_pipe *pipex);
 void		ft_creat_path(int ac, char **av, char **envp, t_pipe *pipex);
 void		ft_erreur127_bonus(t_pipe *pipex);
 void		ft_close_pipe_bonus(t_pipe *pipex);
+int			her_doc_fd(char *limiter);
+void		creat_pipe(t_pipe *pipex);
 #endif

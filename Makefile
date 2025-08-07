@@ -6,12 +6,12 @@
 #    By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/26 10:00:22 by ebenoist          #+#    #+#              #
-#    Updated: 2025/08/03 12:36:56 by ebenoist         ###   ########.fr        #
+#    Updated: 2025/08/06 14:43:29 by ebenoist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= pipex_classic
-BONUS_NAME = pipex
+NAME	= pipex
+BONUS_NAME = pipex_bonus
 
 CC		= cc -g
 CFLAGS	= -Wall -Werror -Wextra -g -Ilibft/includes -Iincludes
@@ -25,6 +25,7 @@ BONUS_SRCS = bonus/main.c\
 			 bonus/arg.c\
 			 bonus/error.c\
 			 bonus/init.c\
+			 bonus/here_doc.c\
 			 
 OBJ		= $(SRC:.c=.o)
 BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
